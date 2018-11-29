@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Redis_Example": {
+      "commandName": "Project",
+      "commandLineArgs": "-provider memory"
+    }
+  }
+}
