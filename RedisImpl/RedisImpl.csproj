@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+<ItemGroup>
+    <ProjectReference Include="..\ServiceInterfaces\ServiceInterfaces.csproj" />
+  </ItemGroup>
+
+<ItemGroup>
+  <PackageReference Include="StackExchange.Redis" Version="2.0.519" />
+</ItemGroup>
+</Project>

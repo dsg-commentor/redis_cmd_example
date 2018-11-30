@@ -1,19 +1,18 @@
-﻿using Microsoft.Extensions.Configuration;
-using Redis_Example.Interfaces;
+﻿using System;
 using StackExchange.Redis;
-using System;
+using ServiceInterfaces;
 
-namespace Redis_Example.Implementations
+namespace RedisImpl
 {
-    class RedisCache : ICache
+    public class RedisCache : ICache
     {
         private IDatabase _cache;
-        private static IConfiguration _configuration;
+        private static string _connectionString;
 
-        public RedisCache(IConfiguration configuration)
+        public RedisCache(string connectionString)
         {
             Console.WriteLine("Initializing Redis Cache");
-            _configuration = configuration;
+            _connectionString = connectionString;
             _cache = lazyConnection.Value.GetDatabase();
         }
         public string Get(string key)
@@ -35,8 +34,7 @@ namespace Redis_Example.Implementations
 
         private static Lazy<ConnectionMultiplexer> lazyConnection = new Lazy<ConnectionMultiplexer>(() =>
         {
-            string cacheConnection = _configuration.GetConnectionString("redis");
-            return ConnectionMultiplexer.Connect(cacheConnection);
+            return ConnectionMultiplexer.Connect(_connectionString);
         });
 
         private ConnectionMultiplexer Connection

@@ -1,11 +1,11 @@
-﻿using Redis_Example.Interfaces;
+﻿using ServiceInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Redis_Example.Implementations
+namespace InMemoryImpl
 {
-    class InMemoryCaching : ICache
+    public class InMemoryCaching : ICache
     {
         private Dictionary<string, string> _cache = new Dictionary<string, string>();
 
@@ -15,7 +15,8 @@ namespace Redis_Example.Implementations
         }
         public string Get(string key)
         {
-            return _cache.GetValue(key,null);
+            _cache.TryGetValue(key,out string value);
+            return value;
         }
 
         public string Ping()

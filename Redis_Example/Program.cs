@@ -3,8 +3,9 @@ using System;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Redis_Example.Implementations;
-using Redis_Example.Interfaces;
+using ServiceInterfaces;
+using RedisImpl;
+using InMemoryImpl;
 
 namespace Redis_Example
 {
@@ -27,7 +28,7 @@ namespace Redis_Example
 
                     if (provider == "redis")
                     {
-                        diContainer.AddSingleton<ICache, RedisCache>();
+                        diContainer.AddSingleton<ICache>(new RedisCache(builder.Build().GetConnectionString("redis")));
                     }
 
                     else if (provider == "memory")
